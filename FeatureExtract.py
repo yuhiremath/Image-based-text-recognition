@@ -109,9 +109,9 @@ def preprocess(img):
     resized = sci.imresize(cropped, (100, 100), interp='bicubic')
     return resized
 
-def extractFeatures():
+def extractFeatures(foldername,outputfile):
     # files assigned to Folder names
-    files = glob.glob('C:\Yashas\MAJOR PROJECT\Data Set\English\Fnt\Sample01*')
+    files = glob.glob(foldername)
     i = -1
     cols = getGLCMColumnNames()
     cols.append('GLCM_CLASS_LABEL')
@@ -142,4 +142,4 @@ def extractFeatures():
             else:
                 features = np.concatenate((features, feature_vector))
         df = pd.DataFrame(features, columns=cols)
-        df.to_excel(r'Featurestest\\' + str(i) + '.xlsx')
+        df.to_excel(outputfile)

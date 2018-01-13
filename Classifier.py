@@ -43,11 +43,6 @@ def generate_validate_data(df,val=None):
 def predictAccuracy(dataFrame):
     final_acc = 0
 
-    import pdb
-    pdb.set_trace()
-
-
-
     print("Prediction Starting.....")
     #Checking accuracy for all five validations
     for i in range(1,6):
@@ -72,48 +67,6 @@ def predictAccuracy(dataFrame):
         print("Prediction of Validation " + str(i) + " done.....\n")
     # Final accuracy is divided by 5 for average accuracy of all the 5 validations
     return final_acc/5
-
-def classifyAndPredict(scope,test_label=None):
-
-    # Loading Classifier
-    with open('PickleFile\\'+scope+'\\classifier.p','rb') as infile:
-        clf = pkl.load(infile)
-    infile.close()
-    print("Classifier Loaded")
-
-    # Loading Normalizer
-    with open('PickleFile\\'+scope+'\\normalizer.p', 'rb') as infile:
-        normalizer = pkl.load(infile)
-    infile.close()
-    print("Normalizer Loaded")
-
-    # feature_array is the features extracted from segmented images ie segment.seglist()
-    feature_array = np.float32(segment.seglist())
-    print("Segmented")
-
-    #feature_array being normalized to range(0,1)
-    feature_array = normalizer.transform(feature_array)
-
-    # Prediction
-    pred = clf.predict(feature_array)
-    print("\nPrediction...")
-
-    # Printing Prediction with c as the serial no.
-    c = 0
-    for x in pred:
-        c += 1
-        x = int(x)
-        if(x>=10):
-            if(x<=35):
-                x += 55
-            elif(x>=36):
-                x += 61
-            x = chr(x)
-        print("\n***************\n" + str(c) + '. ' + str(x))
-
-    if(test_label != None):
-        acc = calAccuracy(test_label,pred)
-        print("\nAccuracy :- " + str(acc*100) + '%')
 
 def calAccuracy(test_labels,pred):
     # Prediction is compared with the actual test labels and the accuracy is calculated and added to final accuracy
