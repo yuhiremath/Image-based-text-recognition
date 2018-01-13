@@ -19,13 +19,13 @@ Recognition and classification of alphanumeric characters from image or pdf file
 * Characters 0-9 of Char74k data set is used for training the data.
 
 ### Pre-Processing
-* The images are first converted in to grayscale and binary thresholded to convert them into black and white images.
+* The images are first converted into grayscale and binary thresholded to convert them into black and white images.
 * The images are cropped with necessary zero padding, so that they are contained in a square.
 * All the images are resized to a single size of 100x100. 
 
 ### Feature Extraction
 * A 100x100 image is sub-divided into 5 parts horizontally.
-* For each part of the sub-divided image, GLCM features with different combinations of angles (0, 45, 90, 135) and distances (1, 3, 5).
+* For each part of the sub-divided image, GLCM features with different combinations of angles (0, 45, 90, 135) and distances (1, 3, 5) are extracted.
 * Extracted features are stored in an excel file.
 
 ### Classification
